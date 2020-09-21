@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.groceryappdemo.Activities.ProductDetailActivity
 import com.example.groceryappdemo.Models.ProductData
 import com.example.groceryappdemo.R
+import com.example.groceryappdemo.app.Config
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_view_adapter.view.*
 
@@ -39,9 +40,8 @@ class SubCategoryAdapter(var mContext: Context, var mList: ArrayList<ProductData
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
         fun bind(data: ProductData){
-            val link = "http://rjtmobile.com/grocery/images/"
             Picasso.get()
-                .load(link+data.image)
+                .load(Config.IMAGE_URL+data.image)
                 .resize(0, 515)
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_background)

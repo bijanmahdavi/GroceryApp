@@ -14,6 +14,7 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.groceryappdemo.Fragments.FirstSubCategoryFragment
 import com.example.groceryappdemo.R
+import com.example.groceryappdemo.app.Endpoints
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
@@ -39,11 +40,10 @@ class MainActivity : AppCompatActivity(), FirstSubCategoryFragment.OnFragmentInt
 
             var jsonObject = JSONObject(params as Map<*, *>)
 
-            var url = "https://grocery-second-app.herokuapp.com/api/auth/register"
             if(name.isNotEmpty() && email.isNotEmpty() && password.length > 5 && password == confirmPassword ) {
                 var request = JsonObjectRequest(
                     Request.Method.POST,
-                    url,
+                    Endpoints.getRegister(),
                     jsonObject,
                     {
                         Log.d("dbg", it.toString())

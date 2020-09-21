@@ -10,6 +10,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.groceryappdemo.R
+import com.example.groceryappdemo.app.Endpoints
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 
@@ -24,8 +25,6 @@ class LoginActivity : AppCompatActivity() {
 
         val email = intent.getSerializableExtra("email")
         val password = intent.getSerializableExtra("pass")
-        //email_edit_text.setText(email.toString())
-        //password_edit_text.setText(password.toString())
 
         submit_button_to_home.setOnClickListener{
             var loginEmail = email_edit_text.text.toString()
@@ -36,10 +35,9 @@ class LoginActivity : AppCompatActivity() {
             params["password"] = loginPassword
 
             var jsonObject = JSONObject(params as Map<*,*>)
-            var url = "https://grocery-second-app.herokuapp.com/api/auth/login"
             var request = JsonObjectRequest(
                 Request.Method.POST,
-                url,
+                Endpoints.getLogin(),
                 jsonObject,
                 {
                     Toast.makeText(this,"Login Success!", Toast.LENGTH_SHORT).show()

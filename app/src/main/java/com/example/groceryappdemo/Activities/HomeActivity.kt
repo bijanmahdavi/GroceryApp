@@ -10,6 +10,7 @@ import com.example.groceryappdemo.Adapters.CategoryAdapter
 import com.example.groceryappdemo.Models.CategoryDataItem
 import com.example.groceryappdemo.Models.DetailsData
 import com.example.groceryappdemo.R
+import com.example.groceryappdemo.app.Endpoints
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_home.*
 
@@ -30,12 +31,10 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun getData(){
-        var url = "https://grocery-second-app.herokuapp.com/api/category"
-        val link = "http://rjtmobile.com/grocery/images/"
         var requestQueue = Volley.newRequestQueue(this)
         var request = StringRequest(
             Request.Method.GET,
-            url,
+            Endpoints.getCategory(),
             {
                 var gson = Gson()
                 var dataResult = gson.fromJson(it, DetailsData::class.java)

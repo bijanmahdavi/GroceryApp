@@ -20,7 +20,7 @@ data class CategoryDataItem(
 
 data class SubCategoriesResult(
     val count: Int,
-    val `data`: List<SubCategoryDataItem>,
+    val data: List<SubCategoryDataItem>,
     val error: Boolean
 )
 
@@ -37,7 +37,7 @@ data class SubCategoryDataItem(
 
 data class ProductResponse(
     val count: Int,
-    val `data`: List<ProductData>,
+    val data: List<ProductData>,
     val error: Boolean
 )
 
