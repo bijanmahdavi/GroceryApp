@@ -24,8 +24,8 @@ class ProductDetailActivity : AppCompatActivity() {
             .load(Config.IMAGE_URL + image)
             .resize(500,500)
             .centerCrop()
-            .placeholder(R.drawable.ic_launcher_background)
-            .error(R.drawable.ic_launcher_background)
+            .placeholder(R.drawable.comfort_food_placeholder)
+            .error(R.drawable.comfort_food_placeholder)
             .into(product_details_image_view)
     }
 }

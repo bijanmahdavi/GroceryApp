@@ -12,13 +12,12 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import com.example.groceryappdemo.Fragments.FirstSubCategoryFragment
 import com.example.groceryappdemo.R
 import com.example.groceryappdemo.app.Endpoints
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
-class MainActivity : AppCompatActivity(), FirstSubCategoryFragment.OnFragmentInteraction {
+class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -69,16 +68,5 @@ class MainActivity : AppCompatActivity(), FirstSubCategoryFragment.OnFragmentInt
             startActivity(Intent(this, LoginActivity::class.java))
 
         }
-    }
-
-    override fun onImageClicked(name: ImageView?) {
-        Log.d("Working", "Its working!")
-        name?.setOnClickListener{
-
-            startActivity(Intent(this, ProductDetailActivity::class.java))
-        }
-
-
-
     }
 }

@@ -8,13 +8,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.groceryappdemo.Activities.ProductDetailActivity
-import com.example.groceryappdemo.Models.ProductData
+import com.example.groceryappdemo.Models.SubCategoryDataItem
 import com.example.groceryappdemo.R
 import com.example.groceryappdemo.app.Config
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.list_view_adapter.view.*
 
-class SubCategoryAdapter(var mContext: Context, var mList: ArrayList<ProductData>) : RecyclerView.Adapter<SubCategoryAdapter.MyViewHolder>() {
+class SubCategoryAdapter(var mContext: Context, var mList: ArrayList<SubCategoryDataItem>) : RecyclerView.Adapter<SubCategoryAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         var view = LayoutInflater.from(mContext).inflate(R.layout.list_view_adapter, parent, false)
@@ -31,7 +31,7 @@ class SubCategoryAdapter(var mContext: Context, var mList: ArrayList<ProductData
         return mList.size
     }
 
-    fun setData(lst: ArrayList<ProductData>) {
+    fun setData(lst: ArrayList<SubCategoryDataItem>) {
         mList = lst
         notifyDataSetChanged()
     }
@@ -39,24 +39,24 @@ class SubCategoryAdapter(var mContext: Context, var mList: ArrayList<ProductData
 
 
     inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView){
-        fun bind(data: ProductData){
+        fun bind(data: SubCategoryDataItem){
             Picasso.get()
-                .load(Config.IMAGE_URL+data.image)
+                .load(Config.IMAGE_URL+data.subImage)
                 .resize(0, 515)
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_background)
                 .into(itemView.list_image)
             Log.d("Data", data.toString())
 
-            itemView.desc_text_view_title.text = data.productName
-            itemView.text_view_description.text = data.description
+            itemView.desc_text_view_title.text = data.subName
+            itemView.text_view_description.text = data.subDescription
 
             itemView.setOnClickListener{
                 var intent = Intent(mContext, ProductDetailActivity::class.java)
                 intent.putExtra("ID", data.catId)
-                intent.putExtra("DESC", data.description)
-                intent.putExtra("IMAGE", data.image)
-                intent.putExtra("NAME", data.productName)
+                intent.putExtra("DESC", data.subDescription)
+                intent.putExtra("IMAGE", data.subImage)
+                intent.putExtra("NAME", data.subName)
                 mContext.startActivity(intent)
             }
 

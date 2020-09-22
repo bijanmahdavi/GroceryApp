@@ -1,7 +1,5 @@
 package com.example.groceryappdemo.app
 
-import com.google.android.material.button.MaterialButton
-
 class Endpoints {
 
     companion object {
@@ -29,7 +27,7 @@ class Endpoints {
         }
 
         fun getProductBySubId(subId: Int): String {
-            return "${Config.BASE_URL + URL_PRODUCTS_BY_SUB_ID}/$subId"
+            return "${Config.BASE_URL + URL_PRODUCTS_BY_SUB_ID}$subId"
         }
     }
 }

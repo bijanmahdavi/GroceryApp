@@ -49,7 +49,9 @@ class CategoryAdapter(var mContext: Context, var mList: ArrayList<CategoryDataIt
             itemView.grid_text_view_title.text = str
 
             itemView.setOnClickListener{
-                mContext.startActivity(Intent(mContext, SubCategoryActivity::class.java))
+                var intent = Intent(mContext, SubCategoryActivity::class.java)
+                intent.putExtra(CategoryDataItem.KEY_CAT_ID, data.catId)
+                mContext.startActivity(intent)
             }
 
 
