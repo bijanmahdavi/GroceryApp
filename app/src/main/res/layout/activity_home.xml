@@ -3,6 +3,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="4">
+    <include layout="@layout/app_tool_bar"/>
     <ImageView
         android:layout_weight="1"
         android:layout_width="match_parent"

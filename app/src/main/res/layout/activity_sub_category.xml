@@ -4,6 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <include layout="@layout/app_tool_bar"/>
+
     <com.google.android.material.tabs.TabLayout
         android:background="@color/colorPrimary"
         app:tabMode="fixed"

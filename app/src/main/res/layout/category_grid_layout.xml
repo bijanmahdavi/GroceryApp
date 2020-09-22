@@ -22,7 +22,7 @@
         android:shadowDx="25"
         android:shadowDy="25"
         android:shadowRadius="25"
-        android:textStyle="normal"
+        android:textStyle="bold"
         android:textSize="25sp"
         android:textColor="#FFFFFF" />
 </RelativeLayout>

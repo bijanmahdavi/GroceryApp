@@ -1,15 +1,24 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:layout_width="match_parent"
+    android:orientation="vertical">
 
+<include layout="@layout/app_tool_bar"/>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:gravity="center"
+    android:layout_height="match_parent"
+    android:padding="15dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:paddingTop="50dp"
+        android:textSize="32dp"
         android:text="Login"
-        android:textSize="32dp" />
+        android:layout_above="@id/email_edit_text"/>
 
     <EditText
         android:layout_margin="8dp"
@@ -47,5 +56,5 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
-
 </RelativeLayout>
+</LinearLayout>
