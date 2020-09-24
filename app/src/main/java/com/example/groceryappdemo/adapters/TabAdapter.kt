@@ -1,10 +1,10 @@
-package com.example.groceryappdemo.Adapters
+package com.example.groceryappdemo.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.groceryappdemo.Fragments.SubCategoryFragment
-import com.example.groceryappdemo.Models.SubCategoryDataItem
+import com.example.groceryappdemo.fragments.SubCategoryFragment
+import com.example.groceryappdemo.models.SubCategoryDataItem
 
 class TabAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 

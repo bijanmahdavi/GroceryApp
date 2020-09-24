@@ -1,4 +1,4 @@
-package com.example.groceryappdemo.Models
+package com.example.groceryappdemo.models
 
 data class ProductDetails (
         val count: Int,

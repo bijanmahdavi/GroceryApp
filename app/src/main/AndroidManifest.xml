@@ -14,11 +14,15 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".Activities.ProductDetailActivity" />
-        <activity android:name=".Activities.SubCategoryActivity" />
-        <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.HomeActivity" />
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".activities.AddAddressActivity"></activity>
+        <activity android:name=".activities.AddressActivity" />
+        <activity android:name=".activities.UpdateActivity" />
+        <activity android:name=".activities.CartActivity" />
+        <activity android:name=".activities.ProductDetailActivity" />
+        <activity android:name=".activities.SubCategoryActivity" />
+        <activity android:name=".activities.LoginActivity" />
+        <activity android:name=".activities.HomeActivity" />
+        <activity android:name=".activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

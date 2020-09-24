@@ -1,15 +1,11 @@
-package com.example.groceryappdemo.Activities
+package com.example.groceryappdemo.activities
 
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
 import com.android.volley.Request
-import com.android.volley.Response
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.groceryappdemo.R
@@ -54,7 +50,7 @@ class MainActivity : AppCompatActivity() {
 
                     },
                     {
-                        Log.d("dbg_error", it.toString())
+                        Log.d("register error", it.toString())
                     }
                 )
 

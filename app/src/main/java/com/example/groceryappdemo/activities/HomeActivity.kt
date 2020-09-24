@@ -1,5 +1,6 @@
-package com.example.groceryappdemo.Activities
+package com.example.groceryappdemo.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -9,9 +10,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.example.groceryappdemo.Adapters.CategoryAdapter
-import com.example.groceryappdemo.Models.CategoryDataItem
-import com.example.groceryappdemo.Models.DetailsData
+import com.example.groceryappdemo.adapters.CategoryAdapter
+import com.example.groceryappdemo.models.CategoryDataItem
+import com.example.groceryappdemo.models.DetailsData
 import com.example.groceryappdemo.R
 import com.example.groceryappdemo.app.Endpoints
 import com.google.gson.Gson
@@ -42,7 +43,7 @@ class HomeActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
             android.R.id.home -> finish()
-            R.id.action_cart -> Toast.makeText(applicationContext, "Shopping Cart", Toast.LENGTH_SHORT).show()
+            R.id.action_cart -> startActivity(Intent(this, CartActivity::class.java))
             R.id.action_settings -> Toast.makeText(applicationContext, "Settings", Toast.LENGTH_SHORT).show()
             R.id.action_profile -> Toast.makeText(applicationContext, "Profile", Toast.LENGTH_SHORT).show()
         }

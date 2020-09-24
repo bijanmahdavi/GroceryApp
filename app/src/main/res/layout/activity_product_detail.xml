@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:weightSum="4">
+<include layout="@layout/app_tool_bar"/>
 
 <ImageView
     android:layout_marginTop="10dp"
@@ -34,4 +35,11 @@
             android:layout_gravity="center"
 
             android:text="Description: "/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_item_to_cart"
+            android:text="Add to Cart"
+            android:layout_gravity="center"
+            android:layout_marginTop="30dp"/>
 </LinearLayout>

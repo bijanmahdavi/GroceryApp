@@ -1,4 +1,4 @@
-package com.example.groceryappdemo.Adapters
+package com.example.groceryappdemo.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.groceryappdemo.Activities.SubCategoryActivity
-import com.example.groceryappdemo.Models.CategoryDataItem
+import com.example.groceryappdemo.activities.SubCategoryActivity
+import com.example.groceryappdemo.models.CategoryDataItem
 import com.example.groceryappdemo.R
 import com.example.groceryappdemo.app.Config
 import com.squareup.picasso.Picasso

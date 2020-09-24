@@ -1,0 +1,82 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:padding="5dp">
+    <ImageView
+        android:id="@+id/cart_image_view"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
+        android:src="@drawable/ic_launcher_background"/>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="5dp">
+
+
+    <TextView
+        android:id="@+id/employee_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Employee Name"
+        android:layout_marginLeft="10dp" />
+
+    <TextView
+        android:id="@+id/employee_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:layout_marginLeft="15dp"
+        android:text=""
+        android:layout_toRightOf="@id/employee_name"/>
+
+    <TextView
+        android:id="@+id/employee_email"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginHorizontal="25dp"
+        android:layout_below="@id/employee_name"
+        android:text="Employee Email"
+        android:textColor="#222"
+        android:textSize="22sp"
+        android:textStyle="italic" />
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_remove"
+        android:background="#FFFFFF"
+        android:id="@+id/subtract_quantity_button"
+        android:layout_toStartOf="@id/add_quantity_button"
+        android:layout_below="@id/delete_employee_button"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_add"
+
+        android:background="#FFFFFF"
+        android:id="@+id/add_quantity_button"
+        android:layout_below="@id/delete_employee_button"
+        android:layout_centerInParent="true"
+        android:layout_alignParentEnd="true"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_edit"
+        android:background="#FFFFFF"
+        android:id="@+id/edit_employee_button"
+        android:layout_below="@id/delete_employee_button"
+        android:layout_centerInParent="true"
+        android:layout_alignParentEnd="true"/>
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_delete"
+        android:background="#FFFFFF"
+        android:id="@+id/delete_employee_button"
+        android:layout_alignParentEnd="true"/>
+</RelativeLayout>
+</LinearLayout>
