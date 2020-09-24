@@ -15,6 +15,7 @@ import com.example.groceryappdemo.models.CategoryDataItem
 import com.example.groceryappdemo.models.DetailsData
 import com.example.groceryappdemo.R
 import com.example.groceryappdemo.app.Endpoints
+import com.example.groceryappdemo.app.SessionManager
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_home.*
 import kotlinx.android.synthetic.main.app_tool_bar.*
@@ -30,7 +31,7 @@ class HomeActivity : AppCompatActivity() {
 
     private fun setupToolBar() {
         var toolbar = toolbar
-        toolbar.title = "Welcome"
+        toolbar.title = "Welcome user:"+ SessionManager(this).getOnlineUserID()
         setSupportActionBar(toolbar)
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
@@ -46,10 +47,16 @@ class HomeActivity : AppCompatActivity() {
             R.id.action_cart -> startActivity(Intent(this, CartActivity::class.java))
             R.id.action_settings -> Toast.makeText(applicationContext, "Settings", Toast.LENGTH_SHORT).show()
             R.id.action_profile -> Toast.makeText(applicationContext, "Profile", Toast.LENGTH_SHORT).show()
+            R.id.action_logout -> logout()
         }
         return true
     }
 
+    private fun logout() {
+        SessionManager(this).logout()
+        startActivity(Intent(this, LoginActivity::class.java))
+        finishAffinity()
+    }
 
     private fun init() {
         setupToolBar()

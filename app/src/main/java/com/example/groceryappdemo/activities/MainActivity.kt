@@ -10,13 +10,22 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.groceryappdemo.R
 import com.example.groceryappdemo.app.Endpoints
+import com.example.groceryappdemo.app.SessionManager
 import kotlinx.android.synthetic.main.activity_main.*
 import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
+
+    lateinit var sessionManager: SessionManager
+
+       override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+           sessionManager = SessionManager(this)
+           if(sessionManager.getUserOnline()) {
+               startActivity(Intent(this, HomeActivity::class.java))
+               finish()
+           }
         init()
     }
 
@@ -59,10 +68,12 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Error Registering", Toast.LENGTH_SHORT).show()
             }
         }
+
         to_login_screen_text_button.setOnClickListener {
 
             startActivity(Intent(this, LoginActivity::class.java))
 
         }
+
     }
 }

@@ -10,13 +10,22 @@ import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
 import com.example.groceryappdemo.R
 import com.example.groceryappdemo.app.Endpoints
+import com.example.groceryappdemo.app.SessionManager
 import kotlinx.android.synthetic.main.activity_login.*
 import org.json.JSONObject
 
 class LoginActivity : AppCompatActivity() {
+
+    lateinit var sessionManager: SessionManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
+        sessionManager = SessionManager(this)
+        if(sessionManager.getUserOnline()) {
+            startActivity(Intent(this, HomeActivity::class.java))
+            finish()
+        }
         init()
     }
 
@@ -39,6 +48,9 @@ class LoginActivity : AppCompatActivity() {
                 Endpoints.getLogin(),
                 jsonObject,
                 {
+                    var id = it.getJSONObject("user").getString("_id")
+                    sessionManager.storeID(id)
+                    Log.d("ID", id.toString())
                     Toast.makeText(this,"Login Success!", Toast.LENGTH_SHORT).show()
                     startActivity(Intent(this, HomeActivity::class.java))
                 },

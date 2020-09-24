@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.groceryappdemo.R
 import com.example.groceryappdemo.adapters.DBViewAdapter
+import com.example.groceryappdemo.app.SessionManager
 import com.example.groceryappdemo.database.DBHelper
 import com.example.groceryappdemo.models.Item
 import kotlinx.android.synthetic.main.activity_cart.*
@@ -38,9 +39,16 @@ class CartActivity : AppCompatActivity(), View.OnClickListener {
             R.id.action_cart -> startActivity(Intent(this, CartActivity::class.java))
             R.id.action_settings -> Toast.makeText(applicationContext, "Settings", Toast.LENGTH_SHORT).show()
             R.id.action_profile -> Toast.makeText(applicationContext, "Profile", Toast.LENGTH_SHORT).show()
+            R.id.action_logout -> logout()
         }
         return true
     }
+    private fun logout() {
+        SessionManager(this).logout()
+        startActivity(Intent(this, LoginActivity::class.java))
+        finishAffinity()
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

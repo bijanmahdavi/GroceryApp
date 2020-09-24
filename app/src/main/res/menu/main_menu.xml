@@ -14,6 +14,12 @@
         android:icon="@drawable/ic_baseline_settings"
         />
     <item
+        app:showAsAction="never"
+        android:id="@+id/action_logout"
+        android:title="Log Out"
+        android:icon="@drawable/ic_baseline_settings"
+        />
+    <item
         app:showAsAction="always"
         android:id="@+id/action_cart"
         android:title="Cart"

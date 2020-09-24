@@ -24,7 +24,7 @@ class Endpoints {
             return Config.BASE_URL + URL_CATEGORY
 
         }
-        fun getAddress() : String {
+        fun saveAddress() : String {
             return Config.BASE_URL + URL_ADDRESS
         }
 
@@ -34,6 +34,14 @@ class Endpoints {
 
         fun getProductBySubId(subId: Int): String {
             return "${Config.BASE_URL + URL_PRODUCTS_BY_SUB_ID}$subId"
+        }
+
+        fun getAddress(): String {
+            return "${Config.BASE_URL + URL_ADDRESS}"
+        }
+
+        fun getAddressByID(id: String): String {
+            return "${Config.BASE_URL + URL_ADDRESS}/$id"
         }
     }
 }
