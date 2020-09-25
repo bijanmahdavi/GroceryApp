@@ -15,31 +15,35 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.groceryappdemo.R
 import com.example.groceryappdemo.adapters.AddressAdapter
+import com.example.groceryappdemo.adapters.SubProductAdapter
 import com.example.groceryappdemo.app.Endpoints
 import com.example.groceryappdemo.app.SessionManager
+import com.example.groceryappdemo.database.DBHelper
 import com.example.groceryappdemo.models.Address
+import com.example.groceryappdemo.models.Item
+import com.example.groceryappdemo.models.ProductData
 import kotlinx.android.synthetic.main.activity_address.*
-import kotlinx.android.synthetic.main.activity_cart.*
-import kotlinx.android.synthetic.main.address_list.*
-import kotlinx.android.synthetic.main.address_list.address_container
-import kotlinx.android.synthetic.main.address_list.view.*
 import kotlinx.android.synthetic.main.app_tool_bar.*
+import kotlinx.android.synthetic.main.fragment_sub_category.view.*
 import org.json.JSONObject
 
 class AddressActivity : AppCompatActivity() {
     private val mList = ArrayList<Address>()
+    private var itemList = ArrayList<Item>()
     private lateinit var sessionManager: SessionManager
+    lateinit var dbHelper: DBHelper
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_address)
         sessionManager = SessionManager(this)
-        getData()
+        dbHelper = DBHelper(this)
+        getAddressData()
         init()
     }
 
-    private fun getData() {
+    private fun getAddressData() {
         Log.d("test", Endpoints.getAddressByID(sessionManager.getOnlineUserID()))
         val request =
             StringRequest(Request.Method.GET,
@@ -68,7 +72,12 @@ class AddressActivity : AppCompatActivity() {
 
     }
 
+    private fun getItemData() : ArrayList<Item> {
+        return dbHelper.getItems()
+    }
+
     private fun init() {
+        itemList = getItemData()
         setupToolBar()
         add_new_address_button.setOnClickListener {
             startActivity(Intent(applicationContext, AddAddressActivity::class.java))

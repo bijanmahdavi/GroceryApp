@@ -2,6 +2,7 @@ package com.example.groceryappdemo.adapters
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +15,6 @@ import com.example.groceryappdemo.app.Config
 import com.example.groceryappdemo.database.DBHelper
 import com.example.groceryappdemo.models.Item
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.activity_cart.view.*
 import kotlinx.android.synthetic.main.cart_list.view.*
 
 class DBViewAdapter(var mContext: Context, var mList: ArrayList<Item>) : RecyclerView.Adapter<DBViewAdapter.MyViewHolder>() {
@@ -52,9 +52,12 @@ class DBViewAdapter(var mContext: Context, var mList: ArrayList<Item>) : Recycle
                 .placeholder(R.drawable.comfort_food_placeholder)
                 .error(R.drawable.comfort_food_placeholder)
                 .into(itemView.cart_image_view)
-            itemView.employee_name.text = "Item Name: "+data.name
+            itemView.item_name.text = data.name
             //itemView.employee_id.text = "ID: "+data.id.toString()
-            itemView.employee_email.text = "Quantity: "+data.amount
+            itemView.item_quantity.text = "Quantity: "+data.amount
+            itemView.item_price.text = "$"+data.price.toString()
+            itemView.item_price.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+            itemView.item_MRP.text = "$"+data.price.toString()
             //itemView.sub_total.text = "Subtotal: "+data.amount*data.price
 
             itemView.delete_employee_button.setOnClickListener {
@@ -63,21 +66,21 @@ class DBViewAdapter(var mContext: Context, var mList: ArrayList<Item>) : Recycle
             }
 
             itemView.edit_employee_button.setOnClickListener {
-                var intent = Intent(mContext, UpdateActivity::class.java)
-                intent.putExtra("ID", data.id)
-                intent.putExtra("NAME", data.name)
-                intent.putExtra("AMOUNT", data.amount)
-                intent.putExtra("IMAGE", data.image)
+
                 itemView.edit_employee_button.visibility = View.GONE
+                itemView.item_quantity.visibility = View.GONE
                 itemView.add_quantity_button.visibility = View.VISIBLE
+                itemView.item_quantity_after_edit.visibility = View.VISIBLE
+                itemView.item_quantity_after_edit.text = data.amount.toString()
                 itemView.subtract_quantity_button.visibility = View.VISIBLE
 
             }
 
             itemView.subtract_quantity_button.setOnClickListener {
-                data.amount--
                 if(data.amount >= 1) {
-                    itemView.employee_email.text = "Quantity: " + data.amount
+                    data.amount--
+                    itemView.item_quantity.text = "Quantity: " + data.amount
+                    itemView.item_quantity_after_edit.text = data.amount.toString()
                     dbHelper.updateItem(data.id, data.name, data.price, data.amount)
                 } else {
                     dbHelper.deleteItem(data.id)
@@ -86,7 +89,8 @@ class DBViewAdapter(var mContext: Context, var mList: ArrayList<Item>) : Recycle
             }
             itemView.add_quantity_button.setOnClickListener {
                 data.amount++
-                itemView.employee_email.text = "Quantity: "+data.amount
+                itemView.item_quantity.text = "Quantity: "+data.amount
+                itemView.item_quantity_after_edit.text = data.amount.toString()
                 dbHelper.updateItem(data.id, data.name, data.price, data.amount)
             }
 

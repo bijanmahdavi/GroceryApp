@@ -68,54 +68,6 @@
         android:textColor="#222"
         android:textSize="17sp"
         android:textStyle="italic" />
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_remove"
-        android:background="#FFFFFF"
-        android:id="@+id/subtract_quantity_button"
-        android:layout_toStartOf="@id/item_quantity_after_edit"
-        android:layout_below="@id/delete_employee_button"/>
-    <TextView
-        android:id="@+id/item_quantity_after_edit"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="25dp"
-        android:visibility="gone"
-        android:text="0"
-        android:textColor="#222"
-        android:textSize="22sp"
-        android:textStyle="italic"
-        android:layout_toStartOf="@id/add_quantity_button"
-        android:layout_below="@id/delete_employee_button" />
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_add"
 
-        android:background="#FFFFFF"
-        android:id="@+id/add_quantity_button"
-        android:layout_below="@id/delete_employee_button"
-        android:layout_centerInParent="true"
-        android:layout_alignParentEnd="true"/>
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_edit"
-        android:background="#FFFFFF"
-        android:id="@+id/edit_employee_button"
-        android:layout_below="@id/delete_employee_button"
-        android:layout_centerInParent="true"
-        android:layout_alignParentEnd="true"/>
-    <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_delete"
-        android:background="#FFFFFF"
-        android:id="@+id/delete_employee_button"
-        android:layout_alignParentEnd="true"/>
 </RelativeLayout>
 </LinearLayout>

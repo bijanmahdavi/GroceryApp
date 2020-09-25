@@ -1,30 +1,36 @@
 <RelativeLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ACABAD"
+    android:background="#fff"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <ImageView
         android:id="@+id/money"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
         android:src="@drawable/ic_money"
-        android:layout_above="@id/button_cash"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/confirm_order_RV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/button_cash"/>
     <Button
         android:id="@+id/button_cash"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cash"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="60dp" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="77dp"
+        android:layout_below="@id/money"
+        android:text="Cash" />
 
     <Button
         android:id="@+id/button_credit_card"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Credit Card"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
+        android:layout_marginLeft="77dp"
+        android:layout_below="@id/money"
         android:layout_marginRight="60dp" />
 
 </RelativeLayout>
