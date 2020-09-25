@@ -1,5 +1,6 @@
 package com.example.groceryappdemo.activities
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.groceryappdemo.R
 import com.example.groceryappdemo.adapters.DBViewAdapter
@@ -44,9 +46,25 @@ class CartActivity : AppCompatActivity(), View.OnClickListener {
         return true
     }
     private fun logout() {
-        SessionManager(this).logout()
-        startActivity(Intent(this, LoginActivity::class.java))
-        finishAffinity()
+
+        var builder = AlertDialog.Builder(this)
+        builder.setTitle("Logout")
+        builder.setMessage("Really want to logout?")
+
+        builder.setPositiveButton("Yes") { dialog, p1 ->
+            Toast.makeText(applicationContext, "See you next time!", Toast.LENGTH_SHORT).show()
+            SessionManager(applicationContext).logout()
+            startActivity(Intent(applicationContext, LoginActivity::class.java))
+            finishAffinity()
+        }
+
+        builder.setNegativeButton("No") { dialog, p1 ->
+            dialog?.dismiss()
+        }
+
+        var alertDialog = builder.create()
+        alertDialog.show()
+
     }
 
 

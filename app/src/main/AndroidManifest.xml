@@ -14,7 +14,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:targetApi="m">
-        <activity android:name=".activities.AddAddressActivity"></activity>
+        <activity android:name=".activities.PaymentActivity"></activity>
+        <activity android:name=".activities.AddAddressActivity" />
         <activity android:name=".activities.AddressActivity" />
         <activity android:name=".activities.UpdateActivity" />
         <activity android:name=".activities.CartActivity" />

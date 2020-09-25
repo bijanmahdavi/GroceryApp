@@ -1,5 +1,6 @@
 package com.example.groceryappdemo.activities
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -7,6 +8,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -17,6 +19,10 @@ import com.example.groceryappdemo.app.Endpoints
 import com.example.groceryappdemo.app.SessionManager
 import com.example.groceryappdemo.models.Address
 import kotlinx.android.synthetic.main.activity_address.*
+import kotlinx.android.synthetic.main.activity_cart.*
+import kotlinx.android.synthetic.main.address_list.*
+import kotlinx.android.synthetic.main.address_list.address_container
+import kotlinx.android.synthetic.main.address_list.view.*
 import kotlinx.android.synthetic.main.app_tool_bar.*
 import org.json.JSONObject
 
@@ -92,9 +98,24 @@ class AddressActivity : AppCompatActivity() {
         return true
     }
     private fun logout() {
-        SessionManager(this).logout()
-        startActivity(Intent(this, LoginActivity::class.java))
-        finishAffinity()
+        var builder = AlertDialog.Builder(this)
+        builder.setTitle("Logout")
+        builder.setMessage("Really want to logout?")
+        builder.setPositiveButton("Yes", object: DialogInterface.OnClickListener{
+            override fun onClick(dialog: DialogInterface?, p1: Int) {
+                Toast.makeText(applicationContext, "See you next time!", Toast.LENGTH_SHORT).show()
+                SessionManager(applicationContext).logout()
+                startActivity(Intent(applicationContext, LoginActivity::class.java))
+                finishAffinity()
+            }
+        })
+        builder.setNegativeButton("No", object: DialogInterface.OnClickListener{
+            override fun onClick(dialog: DialogInterface?, p1: Int) {
+                dialog?.dismiss()
+            }
+        })
+        var alertDialog = builder.create()
+        alertDialog.show()
     }
 
 }

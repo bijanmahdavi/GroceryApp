@@ -1,11 +1,13 @@
 package com.example.groceryappdemo.activities
 
+import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.GridLayoutManager
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
@@ -53,9 +55,24 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun logout() {
-        SessionManager(this).logout()
-        startActivity(Intent(this, LoginActivity::class.java))
-        finishAffinity()
+        var builder = AlertDialog.Builder(this)
+        builder.setTitle("Logout")
+        builder.setMessage("Really want to logout?")
+        builder.setPositiveButton("Yes", object: DialogInterface.OnClickListener{
+            override fun onClick(dialog: DialogInterface?, p1: Int) {
+                Toast.makeText(applicationContext, "See you next time!", Toast.LENGTH_SHORT).show()
+                SessionManager(applicationContext).logout()
+                startActivity(Intent(applicationContext, LoginActivity::class.java))
+                finishAffinity()
+            }
+        })
+        builder.setNegativeButton("No", object: DialogInterface.OnClickListener{
+            override fun onClick(dialog: DialogInterface?, p1: Int) {
+                dialog?.dismiss()
+            }
+        })
+        var alertDialog = builder.create()
+        alertDialog.show()
     }
 
     private fun init() {
