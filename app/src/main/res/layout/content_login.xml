@@ -1,0 +1,60 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical">
+
+    <include layout="@layout/app_tool_bar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        android:padding="15dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:paddingTop="50dp"
+            android:textSize="32dp"
+            android:text="Login"
+            android:layout_above="@id/email_edit_text"/>
+
+        <EditText
+            android:layout_margin="8dp"
+            android:id="@+id/email_edit_text"
+            android:inputType="text"
+            android:hint="Email"
+            android:text="test@test.com"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/password_edit_text"/>
+
+        <EditText
+            android:layout_margin="8dp"
+            android:id="@+id/password_edit_text"
+            android:inputType="textPassword"
+            android:hint="Password"
+            android:text="testtest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/submit_button_to_home"/>
+
+        <Button
+            android:id="@+id/submit_button_to_home"
+            android:background="@color/colorAccent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Login" />
+        <TextView
+            android:id="@+id/to_register_screen_text_button"
+            android:text="Don't Have an account? Register here!"
+            android:textColor="#000"
+            android:layout_centerInParent="true"
+            android:layout_below="@id/submit_button_to_home"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+</LinearLayout>

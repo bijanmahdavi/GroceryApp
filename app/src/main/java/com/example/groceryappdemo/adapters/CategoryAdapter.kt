@@ -11,6 +11,7 @@ import com.example.groceryappdemo.models.CategoryDataItem
 import com.example.groceryappdemo.R
 import com.example.groceryappdemo.app.Config
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_cart.view.*
 import kotlinx.android.synthetic.main.category_grid_layout.view.*
 
 class CategoryAdapter(var mContext: Context, var mList: ArrayList<CategoryDataItem>) : RecyclerView.Adapter<CategoryAdapter.MyViewHolder>() {

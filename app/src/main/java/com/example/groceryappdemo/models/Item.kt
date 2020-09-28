@@ -4,6 +4,7 @@ data class Item(
     var id: String,
     var name: String,
     var price: Int,
+    var mrp: Int,
     var amount: Int,
     var image: String
 

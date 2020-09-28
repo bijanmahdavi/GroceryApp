@@ -40,7 +40,7 @@
         android:layout_below="@id/item_name"
         android:layout_alignParentStart="true"
         android:text="Item Price"
-        android:textColor="#F00"
+        android:textColor="#222"
         android:textSize="20sp"
         android:textStyle="italic" />
     <TextView
@@ -52,7 +52,8 @@
         android:layout_below="@id/item_price"
         android:layout_alignParentStart="true"
         android:text="$"
-        android:textColor="#222"
+        android:textColor="#F00"
+
         android:textSize="20sp"
         android:textStyle="italic" />
 

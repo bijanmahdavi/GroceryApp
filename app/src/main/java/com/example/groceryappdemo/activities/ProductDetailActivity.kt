@@ -79,6 +79,7 @@ class ProductDetailActivity : AppCompatActivity() {
         var price = intent.getIntExtra("PRICE", 0)
         var description = intent.getStringExtra("DESC")
         var amount = intent.getIntExtra("AMOUNT", 1)
+        var mrp = intent.getIntExtra("MRP", 0)
         var image = intent.getStringExtra("IMAGE")
         product_details_product_name.text = productName
         product_details_product_description.text = description
@@ -91,8 +92,8 @@ class ProductDetailActivity : AppCompatActivity() {
             .into(product_details_image_view)
 
         add_item_to_cart.setOnClickListener {
-            dbHelper.addItem(id,productName,price,amount, image)
-            startActivity(Intent(this, CartActivity::class.java))
+            dbHelper.addItem(id,productName,price, mrp, amount, image)
+            startActivity(Intent(this, MainActivity::class.java))
             Log.d("dbg", dbHelper.getItems().toString())
         }
     }

@@ -1,69 +1,24 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-<!--    <include layout="@layout/app_tool_bar"/>-->
-<LinearLayout
-    android:layout_width="match_parent"
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout"
+    android:fitsSystemWindows="true"
+    tools:openDrawer="start"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:layout_margin="10dp"
-    android:orientation="vertical">
-    <TextView
+    android:layout_width="match_parent">
+
+    <include
+        layout="@layout/content_main"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"/>
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:textSize="32dp" />
-    <EditText
-        android:layout_margin="8dp"
-        android:id="@+id/username_login_edit_text"
-        android:inputType="text"
-        android:hint="Username"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:headerLayout="@layout/nav_header"
+        app:menu="@menu/nav_menu"/>
 
-    <EditText
-        android:layout_margin="8dp"
-        android:id="@+id/password_login_edit_text"
-        android:inputType="text"
-        android:hint="Password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <EditText
-        android:layout_margin="8dp"
-        android:id="@+id/confirm_password_login_edit_text"
-        android:inputType="text"
-        android:hint="Confirm Password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <EditText
-        android:layout_margin="8dp"
-        android:id="@+id/email_register_edit_text"
-        android:inputType="text"
-        android:hint="Email"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-
-    <Button
-        android:layout_margin="10dp"
-        android:id="@+id/submit_button_to_login"
-        android:background="@color/colorAccent"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Register" />
-    <TextView
-        android:id="@+id/to_login_screen_text_button"
-        android:text="Already have an account? Login here!"
-        android:textColor="#000"
-        android:layout_centerInParent="true"
-        android:layout_below="@id/submit_button_to_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
-
-</LinearLayout>
-
-
-</RelativeLayout>
+</androidx.drawerlayout.widget.DrawerLayout>

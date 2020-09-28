@@ -6,10 +6,26 @@
     android:padding="20dp">
 
         <TextView
+            android:textStyle="bold"
+            android:id="@+id/address_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Address"
+            android:textColor="#000"
+            android:textSize="20sp" />
+        <TextView
+            android:id="@+id/user_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="user Name"
+            android:textColor="#000"
+            android:textSize="20sp" />
+
+        <TextView
             android:id="@+id/text_view_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Street Address"
+            android:text="Address"
             android:textColor="#000"
             android:textSize="20sp" />
 
@@ -18,14 +34,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="City"
-            android:textColor="#000"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/text_view_pin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PIN Number"
             android:textColor="#000"
             android:textSize="20sp" />
 

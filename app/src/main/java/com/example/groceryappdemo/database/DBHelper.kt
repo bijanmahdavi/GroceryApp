@@ -6,13 +6,14 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 import com.example.groceryappdemo.models.Item
+import com.example.groceryappdemo.models.OrderSummary
 
 class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DATABASE_VERSION) {
 
 
 
     companion object{
-        const val DATA_NAME = "cartData"
+        const val DATA_NAME = "shopCartDB"
         const val DATABASE_VERSION = 1
         const val TABLE_NAME = "cartItems"
         const val COLUMN_ID = "id"
@@ -20,8 +21,9 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DA
         const val COLUMN_PRICE = "price"
         const val COLUMN_AMOUNT = "amount"
         const val COLUMN_IMAGE = "image"
+        const val COLUMN_MRP = "mrp"
 
-        const val createTable = "create table $TABLE_NAME ($COLUMN_ID CHAR(50), $COLUMN_NAME CHAR(50), $COLUMN_PRICE INTEGER, $COLUMN_AMOUNT INTEGER, $COLUMN_IMAGE CHAR(250))"
+        const val createTable = "create table $TABLE_NAME ($COLUMN_ID CHAR(50), $COLUMN_NAME CHAR(50), $COLUMN_PRICE INTEGER, $COLUMN_MRP INTEGER, $COLUMN_AMOUNT INTEGER, $COLUMN_IMAGE CHAR(250))"
         const val dropTable = "drop table $TABLE_NAME"
     }
 
@@ -38,7 +40,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DA
     }
 
     // insert new item
-    fun addItem(id: String, name: String, price: Int, amount: Int, image: String){
+    fun addItem(id: String, name: String, price: Int, mrp: Int, amount: Int, image: String){
         var idList = getItemIDs()
         Log.d("list", idList.toString())
         var database = writableDatabase
@@ -55,6 +57,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DA
             contentValues.put(COLUMN_ID, id)
             contentValues.put(COLUMN_NAME, name)
             contentValues.put(COLUMN_PRICE, price)
+            contentValues.put(COLUMN_MRP, mrp)
             contentValues.put(COLUMN_AMOUNT, amount)
             contentValues.put(COLUMN_IMAGE, image)
             database.insert(TABLE_NAME, null, contentValues)
@@ -95,6 +98,7 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DA
             COLUMN_ID,
             COLUMN_NAME,
             COLUMN_PRICE,
+            COLUMN_MRP,
             COLUMN_AMOUNT,
             COLUMN_IMAGE
         )
@@ -104,9 +108,10 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DA
                 var id = cursor.getString(cursor.getColumnIndex(COLUMN_ID))
                 var name = cursor.getString(cursor.getColumnIndex(COLUMN_NAME))
                 var price = cursor.getInt(cursor.getColumnIndex(COLUMN_PRICE))
+                var mrp = cursor.getInt(cursor.getColumnIndex(COLUMN_MRP))
                 var quantity = cursor.getInt(cursor.getColumnIndex(COLUMN_AMOUNT))
                 var image = cursor.getString(cursor.getColumnIndex(COLUMN_IMAGE))
-                var productItem = Item(id, name, price, quantity, image)
+                var productItem = Item(id, name, price, mrp, quantity, image)
                 itemList.add(productItem)
 
             }while (cursor.moveToNext())
@@ -128,6 +133,80 @@ class DBHelper(context: Context) : SQLiteOpenHelper(context, DATA_NAME, null, DA
         }
         cursor.close()
         return idList
+    }
+
+    fun getCartTotalQuantity(): Int {
+        var database = readableDatabase
+        var count = 0
+        val columns = arrayOf(COLUMN_AMOUNT)
+        var cursor = database.query(TABLE_NAME, columns, null, null, null, null, null)
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                var qty = cursor.getString(cursor.getColumnIndex(COLUMN_AMOUNT)).toInt()
+                count += qty
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        return count
+    }
+
+    fun getCartSubtotal(): Int {
+        var database = readableDatabase
+        var subTotal = 0
+        val itemColumns = arrayOf(COLUMN_AMOUNT, COLUMN_PRICE)
+        var cartCursor = database.query(TABLE_NAME, itemColumns, null, null, null, null, null)
+        if (cartCursor != null && cartCursor.moveToFirst()) {
+            do {
+                var qty = cartCursor.getString(cartCursor.getColumnIndex(COLUMN_AMOUNT)).toInt()
+                var price = cartCursor.getString(cartCursor.getColumnIndex(COLUMN_PRICE)).toInt()
+                subTotal += qty * price
+            } while (cartCursor.moveToNext())
+        }
+        cartCursor.close()
+        return subTotal
+    }
+
+    fun getOrderSummary(): OrderSummary {
+        var database = readableDatabase
+        var total = 0
+        var price = 0
+        var quantity = 0
+        //var discount = 0
+        var deliveryCharges = 0
+        var columns = arrayOf(
+            COLUMN_MRP,
+            COLUMN_PRICE,
+            COLUMN_AMOUNT
+        )
+        var cursor = database.query(TABLE_NAME, columns, null, null, null, null, null)
+        if (cursor != null && cursor.moveToFirst()) {
+            do {
+                total += cursor.getDouble(cursor.getColumnIndex(COLUMN_MRP)).toInt()
+                price += cursor.getDouble(cursor.getColumnIndex(COLUMN_PRICE)).toInt()
+                quantity += cursor.getInt(cursor.getColumnIndex(COLUMN_AMOUNT))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+
+        total *= quantity
+        price *= quantity
+        var discount = total - price
+        //discount=0
+
+        if (price < 300)
+            deliveryCharges = 30
+
+        return OrderSummary(
+            totalAmount = total,
+            ourPrice = price,
+            discount = discount,
+            deliveryCharges = deliveryCharges
+        )
+    }
+
+    fun emptyCart(): Boolean {
+        var database = writableDatabase
+        return database.delete(TABLE_NAME, null, null) > 0
     }
 
 }

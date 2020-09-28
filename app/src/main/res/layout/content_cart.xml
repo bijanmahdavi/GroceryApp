@@ -1,0 +1,113 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="101"
+    android:orientation="vertical">
+    <include layout="@layout/app_tool_bar"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:layout_weight="100"
+        android:background="#FFFFFF"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/cart_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="CART"
+            android:textSize="32dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/home_RV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/cart_title"
+            android:layout_margin="5dp">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/price_total_container"
+        android:background="#fff"
+        android:padding="15dp"
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/original_price"
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Total:"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/discount"
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Discount:"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/delivery_fee"
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Delivery Fee:"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/sub_total"
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Sub Total:"
+            android:textSize="15sp"/>
+        <LinearLayout
+            android:id="@+id/default_address_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:text="Deliver to"
+                app:drawableEndCompat="@drawable/ic_arrow" />
+            <TextView
+                android:layout_marginStart="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/default_address"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:text="11111 someStreet Lane"/>
+            <TextView
+                android:layout_marginStart="4dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/default_address_zip"
+                android:textColor="#000"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:text="San Francisco, California - 94122"/>
+
+        </LinearLayout>
+        <Button
+            android:id="@+id/button_checkout"
+            android:background="@color/colorAccent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginHorizontal="20dp"
+            android:text="Checkout" />
+    </LinearLayout>
+</LinearLayout>

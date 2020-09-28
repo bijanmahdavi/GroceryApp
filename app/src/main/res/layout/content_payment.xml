@@ -1,0 +1,87 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:orientation="vertical">
+
+    <include layout="@layout/app_tool_bar"/>
+
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff">
+
+    <TextView
+        android:id="@+id/cart_item_total"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Total Items: 10000"/>
+    <TextView
+        android:id="@+id/order_summary_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Order Summary"
+        android:layout_below="@+id/cart_item_total"
+        android:gravity="center"
+        android:textSize="32dp"/>
+    <LinearLayout
+        android:id="@+id/sub_total_view_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="#fff"
+        android:padding="15dp"
+        android:layout_below="@id/order_summary_title">
+        <TextView
+            android:id="@+id/original_price_summary"
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Total:"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/discount_summary"
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Discount:"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/delivery_fee_summary"
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Delivery Fee:"
+            android:textSize="15sp"/>
+        <TextView
+            android:id="@+id/sub_total_summary"
+            android:textColor="#000"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Sub Total:"
+            android:textSize="15sp"/>
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/confirm_order_RV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/button_cash"/>
+    <Button
+        android:id="@+id/button_cash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="77dp"
+        android:layout_below="@id/sub_total_view_container"
+        android:text="Cash" />
+    <Button
+        android:id="@+id/button_credit_card"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Credit Card"
+        android:layout_marginLeft="77dp"
+        android:layout_below="@id/sub_total_view_container"
+        android:layout_marginRight="60dp" />
+
+</RelativeLayout>
+</LinearLayout>

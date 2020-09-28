@@ -11,8 +11,12 @@ import com.example.groceryappdemo.app.Config
 import com.example.groceryappdemo.database.DBHelper
 import com.example.groceryappdemo.models.Item
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.cart_list.*
-import kotlinx.android.synthetic.main.cart_list.view.*
+import kotlinx.android.synthetic.main.cart_list.view.cart_image_view
+import kotlinx.android.synthetic.main.cart_list.view.item_MRP
+import kotlinx.android.synthetic.main.cart_list.view.item_name
+import kotlinx.android.synthetic.main.cart_list.view.item_price
+import kotlinx.android.synthetic.main.cart_list.view.item_quantity
+import kotlinx.android.synthetic.main.confirm_cart_list.view.*
 
 class PaymentAdapter(var mContext: Context, var mList: ArrayList<Item>) : RecyclerView.Adapter<PaymentAdapter.MyViewHolder>() {
 
@@ -50,9 +54,13 @@ class PaymentAdapter(var mContext: Context, var mList: ArrayList<Item>) : Recycl
             //itemView.employee_id.text = "ID: "+data.id.toString()
             itemView.item_quantity.text = "Quantity: "+data.amount
             itemView.item_price.text = "$"+data.price.toString()
-            itemView.item_price.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
-            itemView.item_MRP.text = "$"+data.price.toString()
-
+            itemView.item_MRP.visibility = View.INVISIBLE
+/*            if(data.mrp > 0) {
+                var newPrice = data.price - data.mrp
+                itemView.item_MRP.visibility = View.VISIBLE
+                itemView.item_price.paintFlags = Paint.STRIKE_THRU_TEXT_FLAG
+                itemView.item_MRP.text = "$" + newPrice.toString()
+            }*/
         }
     }
 

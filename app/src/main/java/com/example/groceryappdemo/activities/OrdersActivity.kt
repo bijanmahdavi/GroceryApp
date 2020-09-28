@@ -4,6 +4,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -15,44 +16,83 @@ import androidx.core.view.GravityCompat
 import androidx.core.view.MenuItemCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.groceryappdemo.R
-import com.example.groceryappdemo.adapters.DBViewAdapter
+import com.example.groceryappdemo.adapters.AddressAdapter
+import com.example.groceryappdemo.app.Endpoints
 import com.example.groceryappdemo.app.SessionManager
 import com.example.groceryappdemo.database.DBHelper
+import com.example.groceryappdemo.models.Address
 import com.example.groceryappdemo.models.Item
+import com.example.groceryappdemo.models.OrderSummary
 import com.example.groceryappdemo.models.User
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.activity_cart.*
+import kotlinx.android.synthetic.main.activity_address.*
+import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_orders.*
 import kotlinx.android.synthetic.main.app_tool_bar.*
-import kotlinx.android.synthetic.main.content_cart.*
 import kotlinx.android.synthetic.main.layout_menu_cart.view.*
 import kotlinx.android.synthetic.main.nav_header.view.*
+import org.json.JSONObject
 
-class CartActivity : AppCompatActivity(), View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
+class OrdersActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     lateinit var drawerLayout: DrawerLayout
     lateinit var navView: NavigationView
+    private val mList = ArrayList<OrderSummary>()
+    private var itemList = ArrayList<Item>()
+    private lateinit var sessionManager: SessionManager
+    lateinit var dbHelper: DBHelper
     var textViewCartCount: TextView? = null
-    var mList: ArrayList<Item> = ArrayList()
-    private lateinit var dbHelper: DBHelper
-    lateinit var sessionManager: SessionManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_cart)
+        setContentView(R.layout.activity_orders)
+        sessionManager = SessionManager(this)
         dbHelper = DBHelper(this)
+        getOrdersData()
         init()
-
     }
 
+    private fun getOrdersData() {
+        /*val request =
+            StringRequest(
+                Request.Method.GET,
+                Endpoints.getAddressByID(sessionManager.getOnlineUserID()),
+                {
+                    val jsonObj = JSONObject(it)
+                    val data = jsonObj.getJSONArray("data")
+                    for (i in 0 until data.length()) {
+                        Log.d("DA_Data", data[i].toString())
+                        val address = data.getJSONObject(i)
+                        val pinCode = address.getInt("pincode")
+                        val streetName = address.getString("streetName")
+                        val city = address.getString("city")
+                        val houseNo = address.getString("houseNo")
+                        val type = address.getString("type")
+                        mList.add(Address(pinCode, city, streetName, houseNo.toInt(), type, sessionManager.getOnlineUserID()))
+                    }
+                    val adapter = AddressAdapter(this, mList)
+                    address_RV.adapter = adapter
+                    address_RV.layoutManager = LinearLayoutManager(this)
+                }, {
+                    Toast.makeText(this, "ERROR!!", Toast.LENGTH_SHORT).show()
+                })
+        Volley.newRequestQueue(this).add(request)*/
+    }
+
+/*    private fun getOrderData() : ArrayList<OrderSummary> {
+        //return dbHelper.getOrderSummarys()
+    }*/
+
     private fun init() {
-        sessionManager = SessionManager(this)
+        //itemList = getItemData()
+        drawerLayout = drawer_layout_orders
+        navView = nav_view_orders
         setupToolBar()
-        drawerLayout = drawer_layout_cart
-        navView = nav_view_cart
-
-        var guestUser = User("Guest", "Login for more features")
         var headerView = navView.getHeaderView(0)
-
+        var guestUser = User("Guest", "Login for more features")
         if(sessionManager.getUserOnline()) {
             var name = sessionManager.getUserFirstName()
             var email = sessionManager.getUserEmail()
@@ -67,9 +107,6 @@ class CartActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
         drawerLayout.addDrawerListener(toggle)
         toggle.syncState()
         navView.setNavigationItemSelectedListener(this)
-        readData()
-        button_checkout.setOnClickListener(this)
-        default_address_container.setOnClickListener(this)
     }
 
     private fun setupToolBar() {
@@ -83,7 +120,6 @@ class CartActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
     }
 
-    //cart icon with dynamic cart size bubble
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_cart, menu)
         var item = menu.findItem(R.id.action_cart)
@@ -123,7 +159,6 @@ class CartActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
         drawerLayout.closeDrawer(GravityCompat.START)
         return true
     }
-
     private fun logout() {
         var builder = AlertDialog.Builder(this)
         builder.setTitle("Logout")
@@ -144,52 +179,4 @@ class CartActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
         var alertDialog = builder.create()
         alertDialog.show()
     }
-
-    override fun onClick(view: View) {
-        when(view.id){
-            R.id.button_checkout -> toCheckoutActivity()
-            R.id.default_address_container -> toAddressActivity()
-        }
-    }
-    private fun toCheckoutActivity() {
-
-        if(sessionManager.getUserOnline()) {
-            startActivity(Intent(this, PaymentActivity::class.java))
-        } else {
-            Toast.makeText(applicationContext, "Please Register first", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, RegisterActivity::class.java))
-        }
-    }
-    private fun toAddressActivity() {
-
-        if(sessionManager.getUserOnline()) {
-            startActivity(Intent(this, AddressActivity::class.java))
-        } else {
-            Toast.makeText(applicationContext, "Please Register first", Toast.LENGTH_SHORT).show()
-            startActivity(Intent(this, RegisterActivity::class.java))
-        }
-    }
-
-    private fun readData() {
-        mList = dbHelper.getItems()
-        var orderSummary = dbHelper.getOrderSummary()
-
-        val adapter = DBViewAdapter(this, mList)
-        original_price.text = "Total: $"+dbHelper.getCartSubtotal().toString()
-        discount.text = "Discount: $0"//+orderSummary.discount.toString()
-        delivery_fee.text = "Delivery: $"+orderSummary.deliveryCharges.toString()
-        var subtotal = dbHelper.getCartSubtotal() + orderSummary.deliveryCharges
-        sub_total.text = "Subtotal: $"+subtotal
-        default_address.text = sessionManager.getDefaultStreet()
-        default_address_zip.text = sessionManager.getDefaultZip().toString()
-        this.home_RV.adapter = adapter
-        this.home_RV.layoutManager = LinearLayoutManager(this)
-        adapter.setData(mList)
-        adapter.notifyDataSetChanged()
-    }
-
-/*    override fun onResume() {
-        super.onResume()
-        mList = dbHelper.getEmployees()
-    }*/
 }
