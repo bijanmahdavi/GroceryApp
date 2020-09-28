@@ -175,11 +175,22 @@ class CartActivity : AppCompatActivity(), View.OnClickListener, NavigationView.O
         var orderSummary = dbHelper.getOrderSummary()
 
         val adapter = DBViewAdapter(this, mList)
-        original_price.text = "Total: $"+dbHelper.getCartSubtotal().toString()
-        discount.text = "Discount: $0"//+orderSummary.discount.toString()
-        delivery_fee.text = "Delivery: $"+orderSummary.deliveryCharges.toString()
-        var subtotal = dbHelper.getCartSubtotal() + orderSummary.deliveryCharges
-        sub_total.text = "Subtotal: $"+subtotal
+        if(mList.size == 0) {
+            original_price.visibility = View.INVISIBLE
+            discount.visibility = View.INVISIBLE
+            delivery_fee.visibility = View.INVISIBLE
+            sub_total.visibility = View.INVISIBLE
+        } else {
+            original_price.visibility = View.VISIBLE
+            discount.visibility = View.VISIBLE
+            delivery_fee.visibility = View.VISIBLE
+            sub_total.visibility = View.VISIBLE
+            original_price.text = "Total: $" + dbHelper.getCartSubtotal().toString()
+            discount.text = "Discount: $0"//+orderSummary.discount.toString()
+            delivery_fee.text = "Delivery: $" + orderSummary.deliveryCharges.toString()
+            var subtotal = dbHelper.getCartSubtotal() + orderSummary.deliveryCharges
+            sub_total.text = "Subtotal: $" + subtotal
+        }
         default_address.text = sessionManager.getDefaultStreet()
         default_address_zip.text = sessionManager.getDefaultZip().toString()
         this.home_RV.adapter = adapter
